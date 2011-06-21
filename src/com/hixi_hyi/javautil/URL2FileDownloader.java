@@ -53,8 +53,9 @@ public class URL2FileDownloader implements Runnable {
 		dir.mkdirs();
 	}
 
-	/* (非 Javadoc)
-	 * @see java.lang.Runnable#run()
+
+	/**
+	 * ダウンロードを実行します
 	 */
 	@Override
 	public void run() {
@@ -109,8 +110,8 @@ public class URL2FileDownloader implements Runnable {
 		return buffer.toByteArray();
 	}
 
-	/* (非 Javadoc)
-	 * @see java.lang.Object#toString()
+	/**
+	 * URLとFileのパスを表示します
 	 */
 	@Override
 	public String toString() {
