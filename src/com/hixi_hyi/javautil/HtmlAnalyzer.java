@@ -15,37 +15,35 @@
  * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.hixi_hyi.javautil.test;
+package com.hixi_hyi.javautil;
 
-import java.io.File;
-import java.io.IOException;
-import java.net.URL;
-
-import com.hixi_hyi.javautil.URL2FileDownloader;
+import java.util.Collection;
+import java.util.LinkedHashSet;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
- * 指定したURLを指定したFileに書きだすサンプル
+ * Htmlを解析するクラスです．
+ * 今はURLを返すメソッドしかありません．
+ * そのうち更新するかも．
+ *
  * @author Hiroyoshi HOUCHI
  *
  */
-public class URL2FileDownloaderTest {
-	private static final String URL_PATH = "http://www.hixi-hyi.com/";
-//	For Mac
-	private static final String FILE_PATH = "/Download/index.html";
-//	For Windows
-//	private static final String FILE_PATH = "C:¥¥Download¥¥index.html";
+public class HtmlAnalyzer {
+	private static final String URL_PATTERN = "(http|https):([^\\x00-\\x20()\"<>\\x7F-\\xFF])*";
 
-
-	public static void main(String[] args) throws IOException {
-		URL url = new URL(URL_PATH);
-		File file = new File(FILE_PATH);
-		URL2FileDownloader downloader = new URL2FileDownloader(url, file);
-
-		//Threadを使いたい場合
-		Thread thread = new Thread(downloader);
-		thread.start();
-		//普通にダウンロードしたい場合
-		downloader.run();
+	/**
+	 * HTMLから(http,httpsから始まる)重複のないURLを抜き出して返します
+	 * @return URL http or httpsから始まる重複なしのURL
+	 */
+	public static Collection<String> getUrl(String html){
+		Pattern urlPattern = Pattern.compile(URL_PATTERN);
+		Matcher m = urlPattern.matcher(html);
+		LinkedHashSet<String> urlList = new LinkedHashSet<String>();
+		while(m.find()){
+			urlList.add(m.group());
+		}
+		return urlList;
 	}
-
 }
