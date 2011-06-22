@@ -37,7 +37,7 @@ public class HtmlAnalyzer {
 	 * HTMLから(http,httpsから始まる)重複のないURLを抜き出して返します
 	 * @return URL http or httpsから始まる重複なしのURL
 	 */
-	public static Collection<String> getUrl(String html){
+	public static Collection<String> getURL(String html){
 		Pattern urlPattern = Pattern.compile(URL_PATTERN);
 		Matcher m = urlPattern.matcher(html);
 		LinkedHashSet<String> urlList = new LinkedHashSet<String>();

@@ -47,7 +47,7 @@ public class HtmlAnalyzerTest {
 		downloader.run();
 		String html = downloader.getString();
 		ArrayList<String> urlList = new ArrayList<String>();
-		urlList.addAll(HtmlAnalyzer.getUrl(html));
+		urlList.addAll(HtmlAnalyzer.getURL(html));
 		for(String urlStr:urlList){
 			System.out.println(urlStr);
 		}
