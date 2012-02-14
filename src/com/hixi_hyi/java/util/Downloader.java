@@ -36,7 +36,7 @@ import java.net.URLConnection;
  * @author Hiroyoshi HOUCHI
  *
  */
-public class URL2FileDownloader implements Runnable {
+public class Downloader implements Runnable {
 	private URL url;
 	private File file;
 	private ByteArrayOutputStream buffer;
@@ -46,7 +46,7 @@ public class URL2FileDownloader implements Runnable {
 	 * @param url ダウンロード先url
 	 * @param file 保存先file
 	 */
-	public URL2FileDownloader(URL url,File file){
+	public Downloader(URL url,File file){
 		this.url = url;
 		this.file = file;
 		this.buffer = new ByteArrayOutputStream();
@@ -56,7 +56,7 @@ public class URL2FileDownloader implements Runnable {
 
 
 	/**
-	 * ダウンロードを実行します(スレッド対応)
+	 * ダウンロードを実行します
 	 */
 	@Override
 	public void run() {
@@ -111,11 +111,6 @@ public class URL2FileDownloader implements Runnable {
 		return buffer.toByteArray();
 	}
 
-
-	/**
-	 * ダウンロード開始(非スレッド)
-	 * @throws Throwable
-	 */
 	public void download() throws Throwable{
 		try{
 			run();
@@ -123,6 +118,7 @@ public class URL2FileDownloader implements Runnable {
 			throw e.getCause();
 		}
 	}
+
 	/**
 	 * URLとFileのパスを表示します
 	 */

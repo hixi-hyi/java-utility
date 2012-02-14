@@ -33,7 +33,10 @@ public class ByteAcceptServer{
 		        int len = 0;
 		        if((len=sockbis.read(buf))!=0){
 		            buffer.write(buf, 0, len);
-			        System.out.println(buffer.toByteArray());
+		            for(byte b:buffer.toByteArray()){
+		            	System.out.print(b);
+		            }
+		            System.out.println();
 			        sockbos.flush();
 			        buffer.reset();
 		        }
